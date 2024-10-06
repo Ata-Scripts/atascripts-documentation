@@ -2,7 +2,7 @@
 
 [**Youtube Preview**](https://youtu.be/M3DEKzjt\_6Q)
 
-#### Execute the following SQL code in your database:
+#### Execute the following SQL code in your database (sql):
 
 ```sql
 ALTER TABLE `users` 
