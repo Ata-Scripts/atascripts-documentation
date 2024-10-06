@@ -2,12 +2,6 @@
 
 
 
-<div align="center">
-
-<figure><img src=".gitbook/assets/ata png.png" alt="" width="188"><figcaption></figcaption></figure>
-
-</div>
-
 **My name is Atta and I am developing scripts in FiveM** \
 \
 **My goal is customer satisfaction and high quality and unique scripts**
