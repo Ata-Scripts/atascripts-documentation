@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 # ataCharCreator
 
 [YouTube Preview](https://youtu.be/FSygYRjfGso)
@@ -208,7 +212,7 @@ end)
 
 Make sure your server artifacts version is above the **5181**.
 
-* Windows: [https://runtime.fivem.net/artifacts/fivem/build\_server\_windows/master/](https://runtime.fivem.net/artifacts/fivem/build\_server\_windows/master/)
-* Linux: [https://runtime.fivem.net/artifacts/fivem/build\_proot\_linux/master/](https://runtime.fivem.net/artifacts/fivem/build\_proot\_linux/master/)
+* Windows: [https://runtime.fivem.net/artifacts/fivem/build\_server\_windows/master/](https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/)
+* Linux: [https://runtime.fivem.net/artifacts/fivem/build\_proot\_linux/master/](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)
 
 **Enjoy**

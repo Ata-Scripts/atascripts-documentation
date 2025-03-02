@@ -1,13 +1,29 @@
-# About Us
+---
+icon: triangle-exclamation
+---
 
+# WE CHANGED DOCUMENTATION
 
+## WE ALREADY TRANSFERRED ALL DOCS TO DISCORD SERVER
 
-**My name is Atta and I am developing scripts in FiveM** \
-\
-**My goal is customer satisfaction and high quality and unique scripts HELLOOOOOO**
+{% hint style="danger" %}
+## WE ARE TRANSFERRED ALL DATA TO OUR DISCORD SERVER
 
-<div align="center">
+### WE ALREADY TRANSFERRED ALL DOCS TO DISCORD SERVER
 
-<figure><img src=".gitbook/assets/636e0b544a3e3c7c05753bcd_full_logo_white_RGB.png" alt="" width="375"><figcaption><p><a href="https://discord.gg/5tVUgq8">https://discord.gg/5tVUgq8</a></p></figcaption></figure>
+#### WE ALREADY TRANSFERRED ALL DOCS TO DISCORD SERVER
 
-</div>
+WE ALREADY TRANSFERRED ALL DOCS TO DISCORD SERVER
+{% endhint %}
+
+OUR DISCORD INVITE LINK 👇👇👇👇👇👇👇👇👇👇
+
+## [<mark style="background-color:blue;">https://discord.gg/5gs2JGBjHj</mark>](https://discord.gg/5gs2JGBjHj)&#x20;
+
+## [<mark style="background-color:blue;">https://discord.gg/5gs2JGBjHj</mark>](https://discord.gg/5gs2JGBjHj)&#x20;
+
+<div align="center"><figure><img src=".gitbook/assets/0302.gif" alt=""><figcaption><p>WE ALREADY TRANSFERRED ALL DOCS TO DISCORD SERVER</p></figcaption></figure></div>
+
+## [<mark style="background-color:blue;">https://discord.gg/5gs2JGBjHj</mark>](https://discord.gg/5gs2JGBjHj)&#x20;
+
+## [<mark style="background-color:blue;">https://discord.gg/5gs2JGBjHj</mark>](https://discord.gg/5gs2JGBjHj)&#x20;

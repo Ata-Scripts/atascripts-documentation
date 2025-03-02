@@ -1,6 +1,6 @@
 # Table of contents
 
-* [About Us](README.md)
+* [WE CHANGED DOCUMENTATION](README.md)
 
 ## scripts
 
@@ -24,7 +24,7 @@
 * [ataSpawn](scripts/ataspawn/README.md)
   * [Config](scripts/ataspawn/config.md)
 * [ataUIPack](scripts/atauipack/README.md)
-  * [Replace esx\_TextUI](scripts/atauipack/replace-esx\_textui.md)
+  * [Replace esx\_TextUI](scripts/atauipack/replace-esx_textui.md)
 * [ataNotification](scripts/atanotification.md)
 * [ataRace](scripts/atarace/README.md)
   * [Config](scripts/atarace/config.md)
