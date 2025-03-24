@@ -24,3 +24,12 @@
   * [Configuration](resource/coinshop/configuration.md)
   * [CMD's](resource/coinshop/cmds.md)
   * [Exports](resource/coinshop/exports.md)
+
+***
+
+* [🚶 Talk To NPC](talk-to-npc/README.md)
+  * [Installation](talk-to-npc/installation.md)
+  * [Config File](talk-to-npc/config-file.md)
+  * [Configuration](talk-to-npc/configuration.md)
+  * [Events](talk-to-npc/events.md)
+  * [FAQ](talk-to-npc/faq.md)
