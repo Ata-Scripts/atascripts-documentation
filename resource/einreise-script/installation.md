@@ -1,4 +1,4 @@
-# How To Install ?
+# Installation
 
 ### Installation
 

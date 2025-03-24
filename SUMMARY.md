@@ -13,8 +13,13 @@
 ## Resource
 
 * [🛂 Einreise Script](resource/einreise-script/README.md)
-  * [How To Install ?](resource/einreise-script/how-to-install.md)
+  * [Installation](resource/einreise-script/installation.md)
   * [Config File](resource/einreise-script/config-file.md)
   * [Exports](resource/einreise-script/exports.md)
-  * [Customization](resource/einreise-script/customization.md)
+  * [Configuration](resource/einreise-script/configuration.md)
   * [CMD's](resource/einreise-script/cmds.md)
+* [🪙 Coinshop](resource/coinshop/README.md)
+  * [Config File](resource/coinshop/config-file.md)
+  * [Installation](resource/coinshop/installation.md)
+  * [Configuration](resource/coinshop/configuration.md)
+  * [CMD's](resource/coinshop/cmds.md)
