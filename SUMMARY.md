@@ -23,3 +23,4 @@
   * [Installation](resource/coinshop/installation.md)
   * [Configuration](resource/coinshop/configuration.md)
   * [CMD's](resource/coinshop/cmds.md)
+  * [Exports](resource/coinshop/exports.md)
