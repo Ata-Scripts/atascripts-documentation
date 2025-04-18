@@ -45,3 +45,4 @@
   * [Exports](advanced-shop/exports.md)
   * [Admin CMD](advanced-shop/admin-cmd.md)
   * [FAQ](advanced-shop/faq.md)
+* [🏬 Super Market](super-market/README.md)
