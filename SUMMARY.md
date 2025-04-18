@@ -46,3 +46,6 @@
   * [Admin CMD](advanced-shop/admin-cmd.md)
   * [FAQ](advanced-shop/faq.md)
 * [🏬 Super Market](super-market/README.md)
+  * [Installation](super-market/installation.md)
+  * [Config File](super-market/config-file.md)
+  * [FAQ](super-market/faq.md)

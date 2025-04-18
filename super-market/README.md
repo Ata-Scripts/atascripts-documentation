@@ -4,6 +4,6 @@ Introducing the FiveM Supermarket System – the perfect way to bring a realisti
 
 ***
 
-note: that this software file is protected by DMCA protection and its illegal sale or distribution is prohibited.
+Note: This software file is protected by DMCA protection and its illegal sale or distribution is prohibited.
 
 <figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
