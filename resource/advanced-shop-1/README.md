@@ -6,4 +6,4 @@ ATA Advanced Shop is a premium, feature-rich shop management system for FiveM se
 
 note: that this software file is protected by DMCA protection and its illegal sale or distribution is prohibited.
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
