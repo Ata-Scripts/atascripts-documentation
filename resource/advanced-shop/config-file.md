@@ -1,146 +1,109 @@
 # Config File
 
-### Configuration
-
-The config.lua file allows you to customize various aspects of the fishing system.
-
-#### Basic Settings
-
 ```lua
-Config.Locale = 'en' -- Default language (options: 'en', 'de', 'tr')
+Config = {}
 
-Config.Admins = { 
-    'admin',
-    'god',
-    -- 'superadmin', -- Uncomment to add more admin groups
+-- General settings
+Config.Debug = false
+Config.AdminCommands = true -- Allow admin commands for shop management
+Config.InteractionWithTarget = true -- defualt : false / if you want to use qb-target or ox_target set to true
+
+
+-- Inventory settings
+Config.Inventory = {
+    imagePath = "nui://qb-inventory/html/images/", -- Path to inventory item images
+    defaultImage = "./imgs/empty.png" -- Default image for items without an image
 }
 
-Config.FishRod = {
-    item_name = "fishing_rod", -- Item name of the fishing rod
-    price = 100, -- Price of the fishing rod
-    Min_WaitTime = 10000, -- Min time to wait for a fish (10 seconds)
-    Max_WaitTime = 30000, -- Max time to wait for a fish (30 seconds)
+-- Shop default settings (used when creating new shops)
+Config.DefaultShopSettings = {
+    blipId = 52, -- Blip icon on the map
+    blipColor = 2,
+    blipScale = 0.8,
+    blipName = "Supermarket",
+    npcModel = "s_m_m_linecook", -- Default NPC model for shop interactions
+    interactionRange = 2.0,
+    defaultTheme = "light", -- "light" or "dark" theme
+    defaultLogo = "imgs/logo.png", -- Default logo (relative to html folder)
+    OpenMenuText = "Open Shop",
+    initialCash = 10000, -- Starting cash for new shops
+    isOpen = true, -- Whether the shop is open by default
 }
-```
 
-#### XP System
-
-Configure how much XP players gain for catching different tiers of fish:
-
-```lua
-Config.Xp = {
-    ['common'] = { 
-        min = 10, -- Min XP for common fish
-        max = 20, -- Max XP for common fish
-    },
-    ['rare'] = {
-        min = 21, -- Min XP for rare fish
-        max = 40, -- Max XP for rare fish
-    },
-    ['epic'] = {
-        min = 41, -- Min XP for epic fish
-        max = 60, -- Max XP for epic fish
-    },
-    ['legendary'] = {
-        min = 61, -- Min XP for legendary fish
-        max = 80, -- Max XP for legendary fish
-    },
+Config.UI = {
+    ['cash_out_help'] = 'Lorem ipsum dolor sit amet consectetur. Nam id fringilla posuere sodales et. Sed pellentesque commodo sit volutpat imperdietporttitor..'
 }
-```
 
-#### Chance System
 
-Control fishing mechanics and probabilities:
 
-```lua
-Config.ChanceSystem = {
-    -- Broken Fishing Rod
-    broken_rod_chance = 3, -- Chance to break rod (default 3%)
-    
-    -- Minigame Score 
-    minigame_min_score = 90, -- Min score to catch a fish (default 90)
+-- Default categories for new shops
+Config.DefaultCategories = {"foods","drinks" , "tools" , "others"}
 
-    -- Hotspot settings
-    hotspot_radius = 30.0, -- How close to a hotspot players must be (in meters)
-    hotspot_chance = 30, -- Bonus chance (%) for catching fish in hotspots
-    
-    -- Chance to catch nothing
-    nothing_chance = {
-        min = 5,  -- Minimum chance to catch nothing at max level 
-        max = 20, -- Maximum chance to catch nothing at level 1
-    },
-    
-    -- Tier base weights: chance distribution at level 1
-    tier_base = {
-        common = 60,     -- % chance for common fish at level 1
-        rare = 25,       -- % for rare fish at level 1
-        epic = 10,       -- % for epic fish at level 1
-        legendary = 5,   -- % for legendary fish at level 1
-    },
-    
-    -- Tier max weights: chance distribution at max level
-    tier_max = {
-        common = 10,     -- % chance for common fish at max level
-        rare = 25,       -- % for rare fish at max level
-        epic = 30,       -- % for epic fish at max level
-        legendary = 35,  -- % for legendary fish at max level
-    },
+-- Item templates that can be added to markets
+Config.ItemTemplates = {
+        {
+        name = "water_bottle",
+        BuyPrice = 5,
+        description = 'Refreshing bottled water',
+        category = 'drinks'
+        },
+        {
+        name = "sandwich",
+        BuyPrice = 10,
+        description = 'A tasty sandwich',
+        category = 'foods'
+        },
+        {
+        name = "beer",
+        BuyPrice = 12,
+        description = 'Cold beer',
+        category = 'drinks'
+        },
+        {
+        name = "tosti",
+        BuyPrice = 8,
+        description = 'Grilled cheese sandwich',
+        category = 'foods'
+        },
+        {
+        name = "coffee",
+        BuyPrice = 6,
+        description = 'Hot coffee to keep you awake',
+        category = 'drinks'
+        },
+        {
+        name = "cola",
+        BuyPrice = 7,
+        description = 'Refreshing cola drink',
+        category = 'drinks'
+        },
+        {
+        name = "phone",
+        BuyPrice = 250,
+        description = 'Smartphone device',
+        category = 'others'
+        },
+        {
+        name = "bandage",
+        BuyPrice = 15,
+        description = 'Medical bandage for small wounds',
+        category = 'others' 
+        },
+        {
+        name = "lockpick",
+        BuyPrice = 50,
+        description = 'Tool for picking locks',
+        category = 'tools'
+        },
+
 }
-```
 
-#### Leveling System
-
-Configure the maximum level and XP requirements for each level:
-
-```lua
-Config.levels = {
-    MAX_LEVEL = 30, -- Maximum level players can reach
-    xp_needed = {
-        -- [level] = XP needed to reach this level (from previous level)
-        [2] = 100, -- 100 XP needed to reach level 2 from level 1
-        [3] = 200,
-        -- ...and so on
+-- Permissions
+Config.Permissions = {
+    adminGroups = {"admin", "superadmin", "god"}, -- Groups that can use admin commands
+    managementCommands = {
+        addMarket = true, -- Allow adding markets with commands
+        removeMarket = true, -- Allow removing markets with commands
     }
-}
+} 
 ```
-
-#### Fish Market NPC
-
-Configure the NPC for the fish market:
-
-```lua
-Config.NPC = {
-    {
-        model = 'a_m_m_hillbilly_01', -- Model of the NPC
-        coords = vector3(-1836.74, -1260.41, 7.62), -- Location
-        heading = 323.59, -- Heading/direction
-        text = '[E] Open Fish Market', -- Interaction text
-        eventName = 'ata_fishing:openMarket', -- Event name (don't change)
-        eventData = {}, -- Event data (don't change)
-        eventType = 'client', -- Event type (don't change)
-        animation = 'WORLD_HUMAN_STAND_FISHING', -- NPC animation
-        target = true,  -- Use target system (like qb-target/ox-target) or text UI
-    },
-    -- You can add more NPCs by copying this structure
-}
-```
-
-#### Fish Market Items
-
-Configure the available fish in the market:
-
-```lua
-Config.FishMarket = {
-    {
-        name = "salmon", -- Item name
-        label = "Salmon", -- Display name
-        description = "Fish", -- Description
-        img = "./imgs/items/salmon.png", -- Image path
-        price = 520, -- Selling price
-        tier = 'common', -- Tier (common, rare, epic, legendary)
-        -- hotspot = vector3(-2033.64, -1042.25, 5.88), -- Optional hotspot location
-    },
-    -- Add more fish by copying this structure
-}
-```
-

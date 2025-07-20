@@ -1,6 +1,6 @@
-# 🐟 Advanced Fishing
+# 🛒 Advanced Shop
 
-ATA Fishing is an advanced fishing system for FiveM servers, offering a complete and immersive fishing experience with leveling, XP progression, different fish tiers, minigames, and a fish market system. This documentation provides all the information needed to install, configure, and use the script.
+ATA Advanced Shop is a premium, feature-rich shop management system for FiveM servers. This comprehensive script allows server owners to create customizable shops throughout their city, with full inventory management, owner functionality, and a sleek modern UI. Players can purchase items while shop owners enjoy complete control over inventory, pricing, and shop customization.
 
 ***
 

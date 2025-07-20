@@ -1,22 +1,13 @@
 # Exports
 
-### Exports
-
-ATA Fishing provides exports to interact with the fishing system from other resources:
-
-#### Server Exports
-
 ```lua
--- Get player's fishing level
-local level = exports['ata_fishing']:GetPlayerLevel(playerId)
+-- Check if player owns a shop
+exports["ata_advancedshop"]:IsPlayerShopOwner(playerId, shopId)
 
--- Get player's fishing XP
-local xp = exports['ata_fishing']:GetPlayerXP(playerId)
+-- Get all shops data
+exports["ata_advancedshop"]:GetAllShops()
 
--- Add XP to a player
-exports['ata_fishing']:AddPlayerXP(playerId, amount)
-
--- Set a player's level
-exports['ata_fishing']:SetPlayerLevel(playerId, level)
+-- Get specific shop data
+exports["ata_advancedshop"]:GetShopData(shopId)
 ```
 
