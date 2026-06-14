@@ -14,6 +14,7 @@
   * [Troubleshooting](tebex-template/xenon-pro/troubleshooting.md)
   * [Package Names](tebex-template/xenon-pro/package-names.md)
   * [Tiered Category](tebex-template/xenon-pro/tiered-category.md)
+  * [Options - Schema](tebex-template/xenon-pro/options-schema.md)
 
 ## Resource
 
