@@ -11,6 +11,7 @@
 
 * [Xenon PRO](tebex-template/xenon-pro/README.md)
   * [Installation](tebex-template/xenon-pro/installation.md)
+  * [Installation - Video](tebex-template/xenon-pro/installation-video.md)
   * [Troubleshooting](tebex-template/xenon-pro/troubleshooting.md)
   * [Package Names](tebex-template/xenon-pro/package-names.md)
   * [Tiered Category](tebex-template/xenon-pro/tiered-category.md)
