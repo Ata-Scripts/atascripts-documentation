@@ -20,8 +20,7 @@ To add a new language:
 
 Hotspots are special locations where players have increased chances to catch specific fish:
 
-1.  To create a hotspot, add the hotspot vector3 coordinate to a fish in the Config.FishMarket table:\
-
+1.  To create a hotspot, add the hotspot vector3 coordinate to a fish in the Config.FishMarket table:<br>
 
     ```lua
        {
