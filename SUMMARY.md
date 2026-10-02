@@ -19,12 +19,18 @@
 
 ## Resource
 
-* [🐟 Advanced Fishing](resource/advanced-fishing/README.md)
+* [📶 Radio System](resource/advanced-fishing/README.md)
   * [Installation](resource/advanced-fishing/installation.md)
   * [Config File](resource/advanced-fishing/config-file.md)
   * [Exports](resource/advanced-fishing/exports.md)
-  * [Admin CMD](resource/advanced-fishing/admin-cmd.md)
+  * [Admin Panel](resource/advanced-fishing/admin-cmd.md)
   * [FAQ](resource/advanced-fishing/faq.md)
+* [🐟 Advanced Fishing](resource/advanced-fishing-1/README.md)
+  * [Installation](resource/advanced-fishing-1/installation.md)
+  * [Config File](resource/advanced-fishing-1/config-file.md)
+  * [Exports](resource/advanced-fishing-1/exports.md)
+  * [Admin CMD](resource/advanced-fishing-1/admin-cmd.md)
+  * [FAQ](resource/advanced-fishing-1/faq.md)
 * [🛒 Advanced Shop](resource/advanced-shop/README.md)
   * [Installation](resource/advanced-shop/installation.md)
   * [Config File](resource/advanced-shop/config-file.md)

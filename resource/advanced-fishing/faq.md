@@ -1,78 +1,159 @@
 # FAQ
 
-### Localization
+## FAQ
 
-ATA Fishing supports multiple languages. You can find the language files in the locales folder:
+<details>
 
-* English: locales/en.lua
-* German: locales/de.lua
-* Turkish: locales/tr.lua
-* ....
+<summary>Which frameworks are supported?</summary>
 
-To add a new language:
+ESX, QBCore and Qbox. The script finds the running framework by itself. It also runs with no framework at all (standalone).
 
-1. Copy one of the existing language files
-2. Rename it (e.g., fr.lua for French)
-3. Translate all strings in the file
-4. Change the Config.Locale value in config.lua to your language code
+</details>
 
-### Hotspot System
+<details>
 
-Hotspots are special locations where players have increased chances to catch specific fish:
+<summary>Which inventories are supported?</summary>
 
-1.  To create a hotspot, add the hotspot vector3 coordinate to a fish in the Config.FishMarket table:<br>
+ALL OF INVENTORY IN FIVEM
 
-    ```lua
-       {
-           name = "anchovy",
-           -- other properties
-           hotspot = vector3(-2033.64, -1042.25, 5.88),
-       }
-    ```
-2. Players fishing within Config.ChanceSystem.hotspot\_radius of a hotspot will have increased chances to catch that specific fish.
+</details>
 
-### Technical Information
+<details>
 
-#### Database Structure
+<summary>I use another framework, inventory or notification script. What do I need to change?</summary>
 
-ATA Fishing creates a database table called ata\_fishing\_users with the following structure:
+Only `client/editable.lua` and `server/editable.lua`. The job, admin check, inventory and notification functions are all in these two files.
 
-* identifier: Player identifier (VARCHAR(100))
-* level: Player's fishing level (INT)
-* xp: Player's fishing XP (INT)
+</details>
 
-#### Events
+<details>
 
-**Client Events**
+<summary>Who can open the admin panel?</summary>
 
-* ata\_fishing:openMarket: Opens the fish market UI
-* ata\_fishing:startFishing: Starts the fishing process
+Players with the `command` ace, or with one of the groups in `Config.AdminGroups`. On ESX it is the player group. On QBCore and Qbox it is the ace with that name. On standalone, give the ace yourself:
 
-**Server Events**
+```
+add_ace group.admin admin allow
+```
 
-* ata\_fishing:catchFish: Triggered when a player catches a fish
-* ata\_fishing:brokenRod: Triggered when a player's fishing rod breaks
+</details>
 
-#### Callbacks
+<details>
 
-**Server Callbacks**
+<summary>Do I need to restart after changing something in the admin panel?</summary>
 
-* ata\_fishing:getUserData: Gets player fishing data (level, XP, items)
-* ata\_fishing:sellItem: Handles selling a fish
-* ata\_fishing:buyFishRod: Handles buying a fishing rod
+No. The change is saved to `config.lua` and applied to all players right away.
 
-### Troubleshooting
+</details>
 
-#### Common Issues
+<details>
 
-1. Missing Items: Ensure all fish items are correctly added to your inventory system.
-2. Discord Webhook Error: Check that you've entered valid Discord webhook URLs in server/discord.lua.
-3. SQL Errors: Make sure your database connection is working properly. The script automatically creates necessary tables.
-4. Dependencies: Ensure you have the latest version of ata\_core installed.
+<summary>How many channels can a player join?</summary>
 
-#### Getting Support
+Up to `Config.MaxChannels`, and never more than four. The handheld, earpiece and vehicle radio share this limit.
 
-If you encounter any issues or have questions about the script:
+</details>
 
-* Check the script documentation and configuration files
-* Contact us through our Discord server
+<details>
+
+<summary>Does the handheld radio need an item?</summary>
+
+Yes. The handheld opens by using the `radio` item and the earpiece by using the `earpiece` item; there is no key for either. If the player loses the earpiece item, the earpiece disconnects.
+
+</details>
+
+<details>
+
+<summary>How do players open the vehicle radio?</summary>
+
+With the `/car_radio` command.
+
+</details>
+
+<details>
+
+<summary>Can players put a password on any frequency?</summary>
+
+if ferequance is empty , yes they can but all of players need password to join&#x20;
+
+</details>
+
+<details>
+
+<summary>Can dead players use the radio?</summary>
+
+No. Dead or downed players cannot open the radio or connect to a channel. You can add your own ambulance state in `Editable.isDead`.
+
+</details>
+
+<details>
+
+<summary>Players get "Channel unavailable. Check access and the pma-voice radio bridge."</summary>
+
+Check that the three lines from the Installation page are in `pma-voice/fxmanifest.lua`, and that `voice_enableRadios` is not set to `0`.
+
+</details>
+
+<details>
+
+<summary>The client shows "ata_Radio bridge must load after pma client scripts".</summary>
+
+The `client_script` line is not at the end of `pma-voice/fxmanifest.lua`. Move it to the bottom of the file.
+
+</details>
+
+<details>
+
+<summary>I updated pma-voice and the radio stopped working.</summary>
+
+The update replaced `pma-voice/fxmanifest.lua`. Add the three lines from the Installation page again.
+
+</details>
+
+<details>
+
+<summary>The jammer prop does not show.</summary>
+
+The prop needs game build 3095 or newer.
+
+</details>
+
+<details>
+
+<summary>What happens when the jammer timer ends?</summary>
+
+The jammer switches off, but the prop stays in the world until someone picks it up or an admin deletes it.
+
+</details>
+
+<details>
+
+<summary>A vehicle is not in the Vehicles tab. Can it still have a radio?</summary>
+
+Yes. Turn on **Radio in every vehicle** in the Settings tab and enter a frequency. Vehicles missing from the list will use it.
+
+</details>
+
+<details>
+
+<summary>The vehicle radio says it needs a free HUD slot.</summary>
+
+The player is already connected to the maximum number of channels. The vehicle radio connects as soon as they leave one.
+
+</details>
+
+<details>
+
+<summary>How do I add my own talking animation?</summary>
+
+Add a new entry to `Config.Animations` with its `label`, `dict` and `clip`, and an `image` for its card in the menu. If the animation pack is missing on the server, the radio uses the default animation instead.
+
+</details>
+
+<details>
+
+<summary>Can I run my own code when a player talks on the radio?</summary>
+
+Yes. `Editable.onTalking` is called when a player starts or stops talking. It exists in both `client/editable.lua` and `server/editable.lua`.
+
+</details>
