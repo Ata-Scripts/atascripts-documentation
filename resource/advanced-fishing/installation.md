@@ -1,85 +1,114 @@
 # Installation
 
-{% hint style="warning" %}
-The resource folders must be named exactly `ata_Radio` and `pma-voice`.
-{% endhint %}
+## Installation
 
 ### 1. Add the resource
 
-Put the `ata_Radio` folder in your resources folder.
+Extract your downloaded package and put the `ata_SpeedBump` folder inside your server's resources folder. For example:
 
-### 2. Set up pma-voice
+```
+resources/
+└── [ata]/
+    └── ata_SpeedBump/
+        ├── fxmanifest.lua
+        ├── config.lua
+        ├── client/
+        ├── server/
+        ├── shared/
+        ├── html/
+        └── stream/
+```
 
-Only one file needs to change: `pma-voice/fxmanifest.lua`. Nothing else in pma-voice is edited.
+Keep the resource name `ata_SpeedBump` so the start commands and integrations in this guide match your installation. Do not leave it inside a second nested `ata_SpeedBump` folder.
 
-Add this line directly **before** the `server_scripts {` block:
+### 2. Install the dependencies
 
-{% code title="pma-voice/fxmanifest.lua" %}
+Install `ox_lib` and `oxmysql`. Make sure your database connection is working before starting ATA SpeedBump.
+
+The script does not need inventory items or edits to your framework files.
+
+### 3. Set the start order
+
+In `server.cfg`, start the database library, ox\_lib and your framework before ATA SpeedBump:
+
+```cfg
+ensure oxmysql
+ensure ox_lib
+
+# Add ONE line matching your framework:
+# ensure es_extended
+# ensure qb-core
+# ensure qbx_core
+
+ensure ata_SpeedBump
+```
+
+Uncomment the framework line that matches your server, or keep your existing framework start block above `ensure ata_SpeedBump`. For standalone use, no framework line is needed.
+
+The framework is detected automatically. There is no framework selector in `config.lua`.
+
+### 4. Give administrators access
+
+You can grant access through ACE permissions or your framework's admin groups.
+
+#### ACE permissions
+
+Add this to `server.cfg` if your administrators already belong to `group.admin`:
+
+```cfg
+add_ace group.admin ata_speedbump.admin allow
+```
+
+If a player is not already in that group, assign their actual license identifier:
+
+```cfg
+# Replace REPLACE_WITH_PLAYER_LICENSE with the player's real license value.
+add_principal identifier.license:REPLACE_WITH_PLAYER_LICENSE group.admin
+```
+
+For standalone servers, use ACE permissions to grant admin access.
+
+#### Framework permissions
+
+The default groups are:
+
 ```lua
-server_script '@ata_Radio/integrations/pma-server.lua'
-
-server_scripts {
-    -- pma's original entries, untouched
-}
+Config.AdminGroups = { admin = true, superadmin = true, god = true }
 ```
-{% endcode %}
 
-Add these two lines at the **bottom** of the file:
+| Framework  | How access is checked                                                              |
+| ---------- | ---------------------------------------------------------------------------------- |
+| ESX        | The player's ESX group must have a `true` entry in `Config.AdminGroups`.           |
+| QBCore     | QBCore's permission check is called for each group listed in `Config.AdminGroups`. |
+| Qbox       | The player must have a matching `group.<name>` ACE, such as `group.admin`.         |
+| Standalone | The player must have the `ata_speedbump.admin` ACE.                                |
 
-{% code title="pma-voice/fxmanifest.lua" %}
-```lua
-dependency 'ata_Radio'
-client_script '@ata_Radio/integrations/pma-client.lua'
+The explicit `ata_speedbump.admin` ACE works regardless of the detected framework. Custom admin systems can be connected through `Bridge.isAdmin` in `server/editable.lua`.
+
+### 5. Review the configuration
+
+Open `config.lua` and choose your notification mode, streaming distance, maximum placement length and default speed settings. See Config File for the complete reference.
+
+### 6. Start the resource
+
+Restart your server, or run these commands in the server console after adding a new resource folder:
+
 ```
-{% endcode %}
-
-### 3. Start order
-
-`ata_Radio` must start before `pma-voice`.
-
-{% code title="server.cfg" %}
+refresh
+ensure ata_SpeedBump
 ```
-ensure ata_Radio
-ensure pma-voice
-```
-{% endcode %}
 
-### 4. Add the items
+The `ata_speedbumps` table is created automatically on startup. You do not need to import a separate SQL file. The database user needs permission to create the table and read, insert, update and delete its rows.
 
-The script uses three items: `radio`, `earpiece` and `radio_jammer`.
+### 7. Place your first bump
 
-{% tabs %}
-{% tab title="ox_inventory" %}
-Add these to `ox_inventory/data/items.lua`:
+1. Join the server as an authorized administrator.
+2. Enter `/speedbump` in chat.
+3. Click **New bump** and select a model.
+4. Click **Pick points in the world**.
+5. Left-click the start point and the end point, then press **Enter**.
+6. Click **Next**, review the settings and click **Create**.
 
-```lua
-['radio'] = {
-    label = 'Radio', weight = 1000, stack = false, allowArmed = true, close = true, consume = 0,
-    client = { export = 'ata_Radio.useRadio' }
-},
-['earpiece'] = {
-    label = 'Earpiece', weight = 100, stack = false, close = true, consume = 0,
-    client = { export = 'ata_Radio.useEarpiece', image = 'https://cfx-nui-ata_Radio/html/assets/earpiece.png' }
-},
-['radio_jammer'] = {
-    label = 'Radio Jammer', weight = 3000, stack = false, close = true, consume = 0,
-    client = { export = 'ata_Radio.useJammer' }
-},
-```
-{% endtab %}
+Test the placement in a regular vehicle. Emergency-class vehicles are exempt from scripted speed limits and tire spikes by default.
 
-{% tab title="ESX inventory / qb-inventory" %}
-Add the `radio`, `earpiece` and `radio_jammer` items to your items list. The script makes them usable automatically.
-{% endtab %}
-{% endtabs %}
-
-### 5. Restart the server
-
-Check that the bridge is loaded:
-
-* Server console: `[ata_Radio] pma server bridge loaded; stock radio dispatch is filtered.`
-* Client F8 console: `[ata_Radio] pma client bridge loaded; exports registered.`
-
-{% hint style="info" %}
-The database table `ata_radio_player` is created automatically on the first start.
-{% endhint %}
+For the full workflow and controls, see Admin Panel.

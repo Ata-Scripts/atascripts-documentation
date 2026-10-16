@@ -1,4 +1,5 @@
 ---
+icon: mound
 layout:
   width: default
   title:
@@ -21,11 +22,25 @@ layout:
     visible: true
 ---
 
-# 📶 Radio System
+# Speed Bump
 
-A complete radio system for FiveM Players can connect to up to four channels at the same time, listen to all of them, and talk on the one they choose.
+Place speed bumps, speed humps, UK speed cushions and one-way tire spikes directly in your FiveM server with an in-game admin editor.
 
-It comes with three radios (handheld, earpiece and vehicle radio), a live HUD for every channel, job channels, shared GPS, talking animations, a radio jammer, and an in-game admin panel to manage.
+Pick a model, click the start and end points on the road, preview the result and save it. Each placement can have its own name, speed limit and slowdown distance. Tire spikes let traffic pass in one direction and burst tires when vehicles cross the blades from the other direction.
+
+Placements are saved to your database and synchronized with players automatically. The resource detects ESX, QBCore or Qbox. It can also run without a framework using ACE permissions.
+
+
+
+{% embed url="https://youtu.be/ZFjvp494Ro0" %}
+
+{% hint style="info" %}
+### Versions
+
+The Escrow version keeps `config.lua`, `client/editable.lua` and `server/editable.lua` editable. The Open Source version provides access to the core source code as well.
+{% endhint %}
+
+
 
 ***
 

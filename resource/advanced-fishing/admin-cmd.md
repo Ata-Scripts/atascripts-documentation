@@ -1,75 +1,113 @@
 # Admin Panel
 
-Open the panel with the `/radioadmin` command.
+## Admin Panel
 
-Everything you change here is saved to `config.lua` and applied to all players right away. No restart is needed.
+Open the panel with `/speedbump`. If you changed `Config.Command`, use your configured command instead.
 
-{% hint style="info" %}
-The panel is available to players with the `command` ace, or with one of the groups in `Config.AdminGroups`.
-{% endhint %}
+Only authorized administrators can open the panel or save and delete placements. See Installation for permissions.
 
-### Channels
+Changes saved in the panel are stored in the database and synchronized with players automatically. You do not need to restart the resource after creating or editing a placement.
 
-This is the list of your job channels. Job members see these channels in the radio lobby, under **Job Frequency**.
+### Placement list
 
-<figure><img src="../../.gitbook/assets/admin-channels.png" alt=""><figcaption></figcaption></figure>
+The main screen shows your saved placements, their model type, length, speed limit when enabled, and On/Off status.
 
-Click **Add channel** to create a new one, or use the **Actions** menu of a channel to edit, deactivate or delete it. Delete asks for a second click to confirm.
+* **New bump:** Start creating a placement.
+* **All / Bumps / Humps / Cushions / Spikes:** Filter the list by type.
+* **Search:** Find placements by name or street. The search field appears when there are more than five saved placements.
+* **Placement row:** Open that placement for editing.
+* **Go there pin icon:** Teleport to the placement.
+* **Eye icon:** Toggle in-world admin labels.
 
-<figure><img src="../../.gitbook/assets/admin-channel-form.png" alt=""><figcaption></figcaption></figure>
+### Create a placement
 
-* **Label:** The name shown in the lobby.
-* **Frequency:** A number like 1 or 1.50. Two channels cannot use the same frequency.
-* **Password:** Optional. Players must enter it to join.
-* **Only for jobs:** Pick one or more jobs. Leave it empty to let everyone join.
-* **Hide from lobby:** Job members do not see the channel in the lobby and must type the frequency to join.
+#### 1. Model
 
-### Vehicles
+Click **New bump** and select one of the four models:
 
-This is the list of vehicles with a built-in radio. Everyone who gets in the vehicle joins its frequency automatically.
+| Model            | Description                                               | Scripted slowdown enabled by default |
+| ---------------- | --------------------------------------------------------- | ------------------------------------ |
+| Speed Bump       | Short yellow-and-black rubber bump.                       | Yes                                  |
+| Speed Hump       | Wider asphalt hump with painted stripes.                  | Yes                                  |
+| UK Speed Cushion | Separate cushions with gaps between them.                 | Yes                                  |
+| Tire Spikes      | One-way blades that burst tires from the wrong direction. | No                                   |
 
-<figure><img src="../../.gitbook/assets/admin-vehicles.png" alt=""><figcaption></figcaption></figure>
+You can change the slowdown setting later, including on tire spikes.
 
-Click **Add vehicle** to give a vehicle a radio, or use the **Actions** menu to edit, deactivate or delete it.
+#### 2. Place
 
-<figure><img src="../../.gitbook/assets/admin-vehicle-form.png" alt=""><figcaption></figcaption></figure>
+Click **Pick points in the world**. A free camera opens above the road.
 
-* **Vehicle:** The spawn name, like `police2`.
-* **Frequency:** A number like 1 or 1.50. Several vehicles can share one frequency.
-* **Pick a channel:** Click one of your job channels to fill in its frequency and jobs.
-* **Only for jobs:** Only these jobs can talk. Other occupants just listen. Leave it empty to let everyone talk.
-* **Speaker:** Players near the vehicle hear the channel, even when it is parked and empty.
+1. Move the camera to the road you want to use.
+2. Left-click to set the **Start** point.
+3. Move the cursor to the opposite end of the placement. The ghost preview follows your cursor.
+4. Left-click to set the **End** point.
+5. Press **Enter** to return to the menu with both points selected.
 
-### Jammers
+Draw across the road to span the traffic lanes. The two points determine the placement's direction and length; the pieces follow the road surface automatically.
 
-This is the list of every radio jammer placed in the world, with its timer, location and the player who placed it.
+| Control            | Action                              |
+| ------------------ | ----------------------------------- |
+| Mouse movement     | Look around.                        |
+| W / A / S / D      | Move the camera.                    |
+| E / Q              | Move up / down.                     |
+| Left Shift         | Move faster.                        |
+| Left Mouse Button  | Set the next point.                 |
+| Right Mouse Button | Undo the last point.                |
+| Enter              | Confirm after selecting two points. |
+| Backspace          | Cancel point picking.               |
 
-<figure><img src="../../.gitbook/assets/admin-jammers.png" alt=""><figcaption></figcaption></figure>
+These are the default keyboard controls. The four point-picking actions can be changed in `Config.Placing`.
 
-* **Eye icon:** Teleports you next to the jammer.
-* **Deactivate:** Pauses the timer and stops the jamming.
-* **Activate:** Resumes the timer.
-* **Restart:** Runs the full timer again.
-* **Delete:** Removes the jammer and its prop. It asks for a second click to confirm.
+The menu shows the drawn distance, fitted length and piece count. Lengths snap to complete model pieces, so the fitted length can differ slightly from the distance you drew. UK cushions use separate pieces with gaps.
 
-### Animations
+Use **Pick again** to change the endpoints. Toggle **Show it in the world** to show or hide the model preview while editing. Click **Next** to open Settings.
 
-Here you set the default talking animation of each radio. Click the card to choose another one.
+#### 3. Settings
 
-<figure><img src="../../.gitbook/assets/admin-animations.png" alt=""><figcaption></figcaption></figure>
+* **Name:** Optional label, up to 40 characters. If empty, the menu uses the street name or a model-based fallback.
+* **Slow cars down:** Enable or disable the scripted speed limit for this placement.
+* **Speed on arrival:** Choose 10–80 km/h in steps of 5.
+* **Starts slowing down:** Choose 10, 15, 25 or 40 meters before the placement.
+* **Spikes face:** For Tire Spikes, choose **Normal** or **Reversed** to switch the permitted crossing direction.
+* **On / Off:** Set whether the placement is active in the world.
 
-* **Disable:** No talking animation on this radio for anyone.
-* **Can change by player:** Players can pick their own animation with `/radio_animation`. When it is off, everyone plays the default.
+Click **Create** to save the new placement.
 
-### Settings
+Speed limits reduce the vehicle's speed cap gradually. The approach distance and global slowdown rate affect how much speed a fast vehicle loses before reaching the bump.
 
-These are the radio rules for every player. Click **Save settings** to apply them.
+### Tire spike direction
 
-<figure><img src="../../.gitbook/assets/admin-settings.png" alt=""><figcaption></figcaption></figure>
+Tires are safe from the spike logic when crossing in the permitted direction. Crossing the blade line from the opposite direction bursts tires.
 
-* **Share GPS:** Players on the same frequency see each other on the map.
-* **Show member status:** Live health and armor bars under each player in the HUD list.
-* **Default volume:** The volume a channel starts at when a player joins it.
-* **Radio in every vehicle:** Vehicles missing from the Vehicles tab get a radio on the frequency you enter.
-* **Car speaker:** Vehicles with Speaker on play their channel out loud to players nearby.
-* **Speaker range:** Meters around the vehicle, 1 to 50.
+Use the world preview's direction guide and test both directions with a regular vehicle. If the permitted direction is wrong, change **Spikes face** to **Reversed** and save.
+
+Emergency-class vehicles are exempt by default. Turn off `Config.EmergencyIgnore`, or customize `Bridge.ignoreSpikes`, if you want different behavior.
+
+### Edit an existing placement
+
+Click its row in the list. Existing placements open on the **Settings** step, and you can switch to **Model** or **Place** to change the type or pick new points.
+
+Click **Save** to apply your changes. **Cancel** discards unsaved edits.
+
+### Temporarily disable a placement
+
+Open the placement, set the top **On / Off** switch to **Off**, then click **Save**.
+
+The saved record remains in the database, but its objects and driving effects are removed from the world. Turn it back **On** and save to restore it.
+
+### Delete a placement
+
+Open it, click the trash icon and confirm **Delete**. The placement is removed from the database and from every player's world.
+
+Deletion cannot be undone from the panel. Use **Off** instead if you may want the placement again later.
+
+### In-world labels
+
+Opening the panel enables admin labels. Use the eye icon to toggle them.
+
+After closing the panel, nearby labels show the type, ID, name or street, length and speed setting. Stand near the placement on foot and press **E** to reopen it for editing. This shortcut is separate from the E key used to raise the camera during point picking.
+
+### Close the panel
+
+Click the close icon on the main list or press **Escape**. While editing, Escape returns to the list first. In a delete confirmation, Escape dismisses the confirmation first.
