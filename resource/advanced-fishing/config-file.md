@@ -1,128 +1,146 @@
 # Config File
 
-## Config File
+### Configuration
 
-The main settings are in `config.lua`. The configuration below matches the release package. Restart `ata_SpeedBump` after changing Lua configuration or integration files.
+The config.lua file allows you to customize various aspects of the fishing system.
 
-Placements created in the admin panel are stored in the database. They are not written to `config.lua`.
-
-### config.lua
+#### Basic Settings
 
 ```lua
-Config = {}
+Config.Locale = 'en' -- Default language (options: 'en', 'de', 'tr')
 
--- Command that opens the speed bump menu (admins only).
-Config.Command = 'speedbump'
+Config.Admins = { 
+    'admin',
+    'god',
+    -- 'superadmin', -- Uncomment to add more admin groups
+}
 
--- Admins: the ace `ata_speedbump.admin`, or one of these framework groups (ESX / QBCore / Qbox).
--- add_ace group.admin ata_speedbump.admin allow
-Config.AdminGroups = { admin = true, superadmin = true, god = true }
-
--- Notifications: 'ox', 'esx', 'qb', 'qbox' or 'none'.
-Config.Notify = 'ox'
-
--- Pieces are spawned within this distance (meters) of each player.
-Config.StreamDistance = 250.0
-
--- Longest bump an admin can place (meters).
-Config.MaxLength = 30.0
-
--- How fast cars lose speed when they reach a bump with a speed limit (m/s per second).
-Config.SpeedLimitSlowdown = 8.0
-
--- Default speed limit (km/h) and how far before the bump it starts (meters).
-Config.Defaults = { kmh = 30, distance = 15 }
-
--- Emergency vehicles ignore speed limits and tire spikes (see client/editable.lua).
-Config.EmergencyIgnore = true
-
--- Point picking keys: https://docs.fivem.net/docs/game-references/controls/
-Config.Placing = {
-    speed = 0.6,
-    addPoint = 24,
-    undoPoint = 25,
-    done = 191,
-    cancel = 194,
+Config.FishRod = {
+    item_name = "fishing_rod", -- Item name of the fishing rod
+    price = 100, -- Price of the fishing rod
+    Min_WaitTime = 10000, -- Min time to wait for a fish (10 seconds)
+    Max_WaitTime = 30000, -- Max time to wait for a fish (30 seconds)
 }
 ```
 
-### Settings reference
+#### XP System
 
-| Setting                     | Default                      | Description                                                                                                                         |
-| --------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `Config.Command`            | `'speedbump'`                | Chat command without the leading slash. The default opens with `/speedbump`.                                                        |
-| `Config.AdminGroups`        | `admin`, `superadmin`, `god` | Groups checked by the framework admin integration. Keep only the groups you want to allow.                                          |
-| `Config.Notify`             | `'ox'`                       | Notification provider: `'ox'`, `'esx'`, `'qb'`, `'qbox'` or `'none'`.                                                               |
-| `Config.StreamDistance`     | `250.0`                      | Distance in meters used to load placements around the rendered camera. Objects unload beyond this distance plus a 50 m buffer.      |
-| `Config.MaxLength`          | `30.0`                       | Maximum horizontal distance between the two placement points, in meters. The final model length snaps to complete pieces.           |
-| `Config.SpeedLimitSlowdown` | `8.0`                        | How quickly the scripted speed cap decreases, in meters per second per second. A higher positive value slows vehicles more sharply. |
-| `Config.Defaults.kmh`       | `30`                         | Initial speed limit for a new placement, in km/h.                                                                                   |
-| `Config.Defaults.distance`  | `15`                         | Initial approach distance for a new placement, in meters.                                                                           |
-| `Config.EmergencyIgnore`    | `true`                       | Exempts GTA emergency-class vehicles, class 18, from scripted speed limits and tire spikes. Physical bump collision remains.        |
-
-Changing `Config.Defaults` does not overwrite speed settings on existing saved placements. Edit those placements in the admin panel.
-
-The menu offers **10–80 km/h** in steps of 5, and approach distances of **10, 15, 25 or 40 meters**. These menu controls are separate from the initial values in `Config.Defaults`.
-
-#### Notifications
+Configure how much XP players gain for catching different tiers of fish:
 
 ```lua
-Config.Notify = 'ox'
+Config.Xp = {
+    ['common'] = { 
+        min = 10, -- Min XP for common fish
+        max = 20, -- Max XP for common fish
+    },
+    ['rare'] = {
+        min = 21, -- Min XP for rare fish
+        max = 40, -- Max XP for rare fish
+    },
+    ['epic'] = {
+        min = 41, -- Min XP for epic fish
+        max = 60, -- Max XP for epic fish
+    },
+    ['legendary'] = {
+        min = 61, -- Min XP for legendary fish
+        max = 80, -- Max XP for legendary fish
+    },
+}
 ```
 
-Choose the mode that matches your server. Framework notification modes use the matching framework when it is detected. If a selected framework mode is unavailable, the default bridge falls back to ox\_lib notifications. `'none'` disables notifications from the bridge.
+#### Chance System
 
-`ox_lib` remains a required dependency even when using another notification mode.
-
-#### Placement controls
-
-| Setting                    | Default | Action                                                                |
-| -------------------------- | ------- | --------------------------------------------------------------------- |
-| `Config.Placing.speed`     | `0.6`   | Base free-camera movement speed. Hold Left Shift for faster movement. |
-| `Config.Placing.addPoint`  | `24`    | Set a point; default Left Mouse Button.                               |
-| `Config.Placing.undoPoint` | `25`    | Remove the last selected point; default Right Mouse Button.           |
-| `Config.Placing.done`      | `191`   | Confirm both selected points; default Enter.                          |
-| `Config.Placing.cancel`    | `194`   | Cancel point picking; default Backspace.                              |
-
-These are FiveM control IDs. See the [official control reference](https://docs.fivem.net/docs/game-references/controls/) for alternative bindings. Camera movement uses W/A/S/D, E/Q and mouse look; those controls are not configured by `Config.Placing`.
-
-### Editable integrations
-
-Both versions expose `client/editable.lua` and `server/editable.lua` for server-specific integrations.
-
-#### client/editable.lua
-
-| Function                                 | Purpose                                                   |
-| ---------------------------------------- | --------------------------------------------------------- |
-| `Bridge.framework()`                     | Detects Qbox, ESX, QBCore or no framework.                |
-| `Bridge.notify(text, kind)`              | Routes notifications to your selected provider.           |
-| `Bridge.ignoreSpeedLimit(vehicle)`       | Return `true` to exempt a vehicle from scripted slowdown. |
-| `Bridge.ignoreSpikes(vehicle)`           | Return `true` to exempt a vehicle from tire spikes.       |
-| `Bridge.onTyreBurst(vehicle, tyreIndex)` | Hook called after a tire is burst by this resource.       |
-
-Emergency exemptions are based on vehicle class, not the driver's job or siren state. Customize the two ignore functions if your server needs different rules.
-
-#### server/editable.lua
-
-| Function                           | Purpose                                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------------------ |
-| `Bridge.framework()`               | Detects the running framework.                                                       |
-| `Bridge.isAdmin(src)`              | Determines who may open the panel and save or delete placements.                     |
-| `Bridge.onSaved(src, bump, isNew)` | Hook after a successful placement save; `isNew` distinguishes creation from editing. |
-| `Bridge.onDeleted(src, bump)`      | Hook after a saved placement is deleted.                                             |
-
-The save and delete hooks are empty by default. They can be used for your own logging or integrations.
-
-### Model definitions
-
-`shared/kinds.lua` contains model names, segment sizes, cap sizes and dimensions. These values match the streamed models. Keep them unchanged unless you are developing matching replacement models with source access.
-
-### Server export
-
-Other server resources can read the current list of placements:
+Control fishing mechanics and probabilities:
 
 ```lua
-local bumps = exports['ata_SpeedBump']:getBumps()
+Config.ChanceSystem = {
+    -- Broken Fishing Rod
+    broken_rod_chance = 3, -- Chance to break rod (default 3%)
+    
+    -- Minigame Score 
+    minigame_min_score = 90, -- Min score to catch a fish (default 90)
+
+    -- Hotspot settings
+    hotspot_radius = 30.0, -- How close to a hotspot players must be (in meters)
+    hotspot_chance = 30, -- Bonus chance (%) for catching fish in hotspots
+    
+    -- Chance to catch nothing
+    nothing_chance = {
+        min = 5,  -- Minimum chance to catch nothing at max level 
+        max = 20, -- Maximum chance to catch nothing at level 1
+    },
+    
+    -- Tier base weights: chance distribution at level 1
+    tier_base = {
+        common = 60,     -- % chance for common fish at level 1
+        rare = 25,       -- % for rare fish at level 1
+        epic = 10,       -- % for epic fish at level 1
+        legendary = 5,   -- % for legendary fish at level 1
+    },
+    
+    -- Tier max weights: chance distribution at max level
+    tier_max = {
+        common = 10,     -- % chance for common fish at max level
+        rare = 25,       -- % for rare fish at max level
+        epic = 30,       -- % for epic fish at max level
+        legendary = 35,  -- % for legendary fish at max level
+    },
+}
 ```
 
-Call it after ATA SpeedBump has finished loading its database records. The export returns a list sorted by descending ID. It is a read interface; changing its returned data is not a supported way to save or synchronize placements.
+#### Leveling System
+
+Configure the maximum level and XP requirements for each level:
+
+```lua
+Config.levels = {
+    MAX_LEVEL = 30, -- Maximum level players can reach
+    xp_needed = {
+        -- [level] = XP needed to reach this level (from previous level)
+        [2] = 100, -- 100 XP needed to reach level 2 from level 1
+        [3] = 200,
+        -- ...and so on
+    }
+}
+```
+
+#### Fish Market NPC
+
+Configure the NPC for the fish market:
+
+```lua
+Config.NPC = {
+    {
+        model = 'a_m_m_hillbilly_01', -- Model of the NPC
+        coords = vector3(-1836.74, -1260.41, 7.62), -- Location
+        heading = 323.59, -- Heading/direction
+        text = '[E] Open Fish Market', -- Interaction text
+        eventName = 'ata_fishing:openMarket', -- Event name (don't change)
+        eventData = {}, -- Event data (don't change)
+        eventType = 'client', -- Event type (don't change)
+        animation = 'WORLD_HUMAN_STAND_FISHING', -- NPC animation
+        target = true,  -- Use target system (like qb-target/ox-target) or text UI
+    },
+    -- You can add more NPCs by copying this structure
+}
+```
+
+#### Fish Market Items
+
+Configure the available fish in the market:
+
+```lua
+Config.FishMarket = {
+    {
+        name = "salmon", -- Item name
+        label = "Salmon", -- Display name
+        description = "Fish", -- Description
+        img = "./imgs/items/salmon.png", -- Image path
+        price = 520, -- Selling price
+        tier = 'common', -- Tier (common, rare, epic, legendary)
+        -- hotspot = vector3(-2033.64, -1042.25, 5.88), -- Optional hotspot location
+    },
+    -- Add more fish by copying this structure
+}
+```
+

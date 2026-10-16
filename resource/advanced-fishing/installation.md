@@ -1,114 +1,92 @@
 # Installation
 
-## Installation
+### Installation
 
-### 1. Add the resource
+#### Step 1: Install the Resource
 
-Extract your downloaded package and put the `ata_SpeedBump` folder inside your server's resources folder. For example:
+1. Download the ata\_fishing resource
+2. Place it in your server's resources directory
+3. Add ensure ata\_fishing to your server.cfg
 
-```
-resources/
-└── [ata]/
-    └── ata_SpeedBump/
-        ├── fxmanifest.lua
-        ├── config.lua
-        ├── client/
-        ├── server/
-        ├── shared/
-        ├── html/
-        └── stream/
-```
+#### Step 2: Database Setup
 
-Keep the resource name `ata_SpeedBump` so the start commands and integrations in this guide match your installation. Do not leave it inside a second nested `ata_SpeedBump` folder.
+The script will automatically create the necessary database tables when it starts.
 
-### 2. Install the dependencies
+#### Step 3: Add Items
 
-Install `ox_lib` and `oxmysql`. Make sure your database connection is working before starting ATA SpeedBump.
+**For QBCore:**
 
-The script does not need inventory items or edits to your framework files.
-
-### 3. Set the start order
-
-In `server.cfg`, start the database library, ox\_lib and your framework before ATA SpeedBump:
-
-```cfg
-ensure oxmysql
-ensure ox_lib
-
-# Add ONE line matching your framework:
-# ensure es_extended
-# ensure qb-core
-# ensure qbx_core
-
-ensure ata_SpeedBump
-```
-
-Uncomment the framework line that matches your server, or keep your existing framework start block above `ensure ata_SpeedBump`. For standalone use, no framework line is needed.
-
-The framework is detected automatically. There is no framework selector in `config.lua`.
-
-### 4. Give administrators access
-
-You can grant access through ACE permissions or your framework's admin groups.
-
-#### ACE permissions
-
-Add this to `server.cfg` if your administrators already belong to `group.admin`:
-
-```cfg
-add_ace group.admin ata_speedbump.admin allow
-```
-
-If a player is not already in that group, assign their actual license identifier:
-
-```cfg
-# Replace REPLACE_WITH_PLAYER_LICENSE with the player's real license value.
-add_principal identifier.license:REPLACE_WITH_PLAYER_LICENSE group.admin
-```
-
-For standalone servers, use ACE permissions to grant admin access.
-
-#### Framework permissions
-
-The default groups are:
+Open qb-core/shared/items.lua and add the following items:
 
 ```lua
-Config.AdminGroups = { admin = true, superadmin = true, god = true }
+salmon                     = { name = 'salmon', label = 'Salmon', weight = 500, type = 'item', image = 'salmon.png', unique = false, useable = true, shouldClose = true, description = 'A fresh and tasty salmon caught from the river.' },
+tuna                       = { name = 'tuna', label = 'Tuna', weight = 700, type = 'item', image = 'tuna.png', unique = false, useable = true, shouldClose = true, description = 'A big and meaty tuna, perfect for sushi.' },
+trout                      = { name = 'trout', label = 'Trout', weight = 400, type = 'item', image = 'trout.png', unique = false, useable = true, shouldClose = true, description = 'A colorful trout, a fisherman's favorite.' },
+bass                       = { name = 'bass', label = 'Bass', weight = 600, type = 'item', image = 'bass.png', unique = false, useable = true, shouldClose = true, description = 'A chunky bass, good for grilling.' },
+mackerel                   = { name = 'mackerel', label = 'Mackerel', weight = 350, type = 'item', image = 'mackerel.png', unique = false, useable = true, shouldClose = true, description = 'Oily but delicious, full of flavor.' },
+catfish                    = { name = 'catfish', label = 'Catfish', weight = 800, type = 'item', image = 'catfish.png', unique = false, useable = true, shouldClose = true, description = 'A slippery bottom-dweller, great fried.' },
+cod                        = { name = 'cod', label = 'Cod', weight = 550, type = 'item', image = 'cod.png', unique = false, useable = true, shouldClose = true, description = 'Classic white fish, mild and flaky.' },
+snapper                    = { name = 'snapper', label = 'Snapper', weight = 450, type = 'item', image = 'snapper.png', unique = false, useable = true, shouldClose = true, description = 'A bright red snapper, fresh from the sea.' },
+anchovy                    = { name = 'anchovy', label = 'Anchovy', weight = 50, type = 'item', image = 'anchovy.png', unique = false, useable = true, shouldClose = true, description = 'Tiny but salty, good on pizza.' },
+sardine                    = { name = 'sardine', label = 'Sardine', weight = 60, type = 'item', image = 'sardine.png', unique = false, useable = true, shouldClose = true, description = 'Packed with flavor in a small package.' },
+halibut                    = { name = 'halibut', label = 'Halibut', weight = 700, type = 'item', image = 'halibut.png', unique = false, useable = true, shouldClose = true, description = 'A flat and tasty white fish.' },
+grouper                    = { name = 'grouper', label = 'Grouper', weight = 750, type = 'item', image = 'grouper.png', unique = false, useable = true, shouldClose = true, description = 'Big, slow, and delicious.' },
+flounder                   = { name = 'flounder', label = 'Flounder', weight = 400, type = 'item', image = 'flounder.png', unique = false, useable = true, shouldClose = true, description = 'Flat and delicate, great pan-fried.' },
+perch                      = { name = 'perch', label = 'Perch', weight = 300, type = 'item', image = 'perch.png', unique = false, useable = true, shouldClose = true, description = 'Small but flavorful, caught in lakes.' },
+herring                    = { name = 'herring', label = 'Herring', weight = 250, type = 'item', image = 'herring.png', unique = false, useable = true, shouldClose = true, description = 'Often smoked or pickled, a classic.' },
+tilapia                    = { name = 'tilapia', label = 'Tilapia', weight = 400, type = 'item', image = 'tilapia.png', unique = false, useable = true, shouldClose = true, description = 'Mild and easy to cook, a popular choice.' },
+eel                        = { name = 'eel', label = 'Eel', weight = 350, type = 'item', image = 'eel.png', unique = false, useable = true, shouldClose = true, description = 'Slimy but delicious when grilled.' },
+swordfish                  = { name = 'swordfish', label = 'Swordfish', weight = 900, type = 'item', image = 'swordfish.png', unique = false, useable = true, shouldClose = true, description = 'A strong and meaty steak of the sea.' },
+marlin                     = { name = 'marlin', label = 'Marlin', weight = 1000, type = 'item', image = 'marlin.png', unique = false, useable = true, shouldClose = true, description = 'A trophy fish, lean and firm.' },
+pike                       = { name = 'pike', label = 'Pike', weight = 650, type = 'item', image = 'pike.png', unique = false, useable = true, shouldClose = true, description = 'Long and sharp-toothed, tricky to catch.' },
+fishing_rod                = { name = 'fishing_rod', label = 'Fishing Rod', weight = 2000, type = 'item', image = 'fishing_rod.png', unique = false, useable = true, shouldClose = true, description = 'A fishing rod to catch fish.' },
 ```
 
-| Framework  | How access is checked                                                              |
-| ---------- | ---------------------------------------------------------------------------------- |
-| ESX        | The player's ESX group must have a `true` entry in `Config.AdminGroups`.           |
-| QBCore     | QBCore's permission check is called for each group listed in `Config.AdminGroups`. |
-| Qbox       | The player must have a matching `group.<name>` ACE, such as `group.admin`.         |
-| Standalone | The player must have the `ata_speedbump.admin` ACE.                                |
+**For ESX:**
 
-The explicit `ata_speedbump.admin` ACE works regardless of the detected framework. Custom admin systems can be connected through `Bridge.isAdmin` in `server/editable.lua`.
+Run the following SQL query in your database:
 
-### 5. Review the configuration
-
-Open `config.lua` and choose your notification mode, streaming distance, maximum placement length and default speed settings. See Config File for the complete reference.
-
-### 6. Start the resource
-
-Restart your server, or run these commands in the server console after adding a new resource folder:
-
+```sql
+INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES
+    ('salmon', 'Salmon', 1, 0, 1),
+    ('tuna', 'Tuna', 1, 0, 1),
+    ('trout', 'Trout', 1, 0, 1),
+    ('bass', 'Bass', 1, 0, 1),
+    ('mackerel', 'Mackerel', 1, 0, 1),
+    ('catfish', 'Catfish', 1, 0, 1),
+    ('cod', 'Cod', 1, 0, 1),
+    ('snapper', 'Snapper', 1, 0, 1),
+    ('anchovy', 'Anchovy', 1, 0, 1),
+    ('sardine', 'Sardine', 1, 0, 1),
+    ('halibut', 'Halibut', 1, 0, 1),
+    ('grouper', 'Grouper', 1, 0, 1),
+    ('flounder', 'Flounder', 1, 0, 1),
+    ('perch', 'Perch', 1, 0, 1),
+    ('herring', 'Herring', 1, 0, 1),
+    ('tilapia', 'Tilapia', 1, 0, 1),
+    ('eel', 'Eel', 1, 0, 1),
+    ('swordfish', 'Swordfish', 1, 0, 1),
+    ('marlin', 'Marlin', 1, 0, 1),
+    ('pike', 'Pike', 1, 0, 1),
+    ('fishing_rod', 'Fishing Rod', 1, 0, 1);
 ```
-refresh
-ensure ata_SpeedBump
+
+#### Step 4: Add Item Images
+
+Copy all the images from the INSTALL/icons folder to your inventory resource's images folder:
+
+* For QBCore: Copy to qb-inventory/html/images/
+* For ESX: Copy to es\_extended/html/img/items/
+
+#### Step 5: Setup Discord Webhooks (Optional)
+
+Open server/discord.lua and add your Discord webhook URLs:
+
+```lua
+WebHooks = {
+    ['ping_everyone'] = false, -- ping everyone when webhook message is sent (true/false)
+    ['admin_actions'] = 'YOUR_WEBHOOK_URL_HERE',
+    ['player_level_up'] = 'YOUR_WEBHOOK_URL_HERE',
+    ['fishing_actions_catch'] = 'YOUR_WEBHOOK_URL_HERE',
+}
 ```
-
-The `ata_speedbumps` table is created automatically on startup. You do not need to import a separate SQL file. The database user needs permission to create the table and read, insert, update and delete its rows.
-
-### 7. Place your first bump
-
-1. Join the server as an authorized administrator.
-2. Enter `/speedbump` in chat.
-3. Click **New bump** and select a model.
-4. Click **Pick points in the world**.
-5. Left-click the start point and the end point, then press **Enter**.
-6. Click **Next**, review the settings and click **Create**.
-
-Test the placement in a regular vehicle. Emergency-class vehicles are exempt from scripted speed limits and tire spikes by default.
-
-For the full workflow and controls, see Admin Panel.
