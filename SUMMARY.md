@@ -19,6 +19,12 @@
 
 ## Resource
 
+* [Ambient Sound](resource/ambient-sound/README.md)
+  * [Installation](resource/ambient-sound/installation.md)
+  * [Config File](resource/ambient-sound/config-file.md)
+  * [Admin Panel](resource/ambient-sound/admin-panel.md)
+  * [Exports](resource/ambient-sound/exports.md)
+  * [FAQ](resource/ambient-sound/faq.md)
 * [Speed Bump](resource/speed-bump/README.md)
   * [Installation](resource/speed-bump/installation.md)
   * [Config File](resource/speed-bump/config-file.md)
