@@ -10,7 +10,7 @@ every player plate, who owns it and which car its on, search by plate, owner, pl
 
 click a plate to give it to someone else, take it off a car or delete it, **Give plate** hands out any plate
 
-![](../../.gitbook/assets/vp_admin_plates.jpg)
+![](../../.gitbook/assets/vp_admin_plates2.jpg)
 
 ## catalog
 

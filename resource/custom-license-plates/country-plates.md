@@ -17,9 +17,11 @@ DE = { car = 'AA AA 999', bike = 'AA AA/999' }
 
 ## saudi arabia
 
-![](../../.gitbook/assets/vp_car_sa.jpg)
+![](../../.gitbook/assets/vp_car_sa2.jpg)
 
-arabic and latin on the same plate, both drawn from the one plate text
+arabic and latin on the same plate, both drawn from the one plate text, every arabic letter and number sits right above its latin one like the real plate
+
+![](../../.gitbook/assets/vp_sa_close.jpg)
 
 ```lua
 SA = { car = '9999|AAA', bike = '9999/AAA', letters = 'ABJDRSXTEGKLZNHUV', strict = true }
@@ -27,12 +29,12 @@ SA = { car = '9999|AAA', bike = '9999/AAA', letters = 'ABJDRSXTEGKLZNHUV', stric
 
 saudi has a long and a short plate, the player picks one in the shop
 
-## israel
+## turkey
 
-![](../../.gitbook/assets/vp_car_il.jpg)
+![](../../.gitbook/assets/vp_car_tr.jpg)
 
 ```lua
-IL = { car = '99-999-99', bike = '999/99-99', strict = true }
+TR = { car = '99 AAA 999', bike = '99 AAA/999' }
 ```
 
 ## how the format works

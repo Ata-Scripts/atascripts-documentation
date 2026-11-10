@@ -4,7 +4,7 @@ walk up to the counter or type `/plateshop`, the plate you pick shows up on the 
 
 the table plate is only on your screen, players next to you dont see it
 
-![](../../.gitbook/assets/vp_shop_buy.jpg)
+![](../../.gitbook/assets/vp_shop_buy2.jpg)
 
 ## buy
 
@@ -39,7 +39,7 @@ all your plates, which car theyre on, and what you can do with them
 * sell it back (half the price by default)
 * right click to get a share code for the design
 
-![](../../.gitbook/assets/vp_shop_mine.jpg)
+![](../../.gitbook/assets/vp_shop_mine2.jpg)
 
 ## putting plates on
 
